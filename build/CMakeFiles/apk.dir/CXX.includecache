@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/Element.h
+iostream
+-
+
+/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/Tree.h
+iostream
+-
+Element.h
+/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/Element.h
+
+/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/main.cpp
+iostream
+-
+Element.h
+/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/Element.h
+Tree.h
+/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/Tree.h
+

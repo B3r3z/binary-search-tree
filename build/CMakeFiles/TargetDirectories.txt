@@ -1,0 +1,3 @@
+/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/build/CMakeFiles/rebuild_cache.dir
+/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/build/CMakeFiles/edit_cache.dir
+/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/build/CMakeFiles/apk.dir
