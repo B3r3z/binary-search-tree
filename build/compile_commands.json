@@ -1,7 +1,8 @@
 [
 {
-  "directory": "/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/build",
-  "command": "/usr/bin/c++    -g   -Wall -g -Wextra -Wpedantic -std=gnu++11 -o CMakeFiles/apk.dir/main.cpp.o -c \"/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/main.cpp\"",
-  "file": "/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/main.cpp"
+  "directory": "/home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree/build",
+  "command": "/usr/bin/g++   -g -std=gnu++11 -Wall -g -Wextra -Wpedantic -o CMakeFiles/apk.dir/main.cpp.o -c /home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree/main.cpp",
+  "file": "/home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree/main.cpp",
+  "output": "CMakeFiles/apk.dir/main.cpp.o"
 }
 ]
