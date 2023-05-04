@@ -47,8 +47,10 @@ int main() {
                     cout << "Enter element " << (i + 1) << " to remove: ";
                     cin >> toDelete;
                     try {
-                        while (!tree.contains(toDelete)) {
+                        if (tree.contains(toDelete)) {
                             tree.removeElement(toDelete);
+                        } else {
+                            cout << "Element not found in the tree." << endl;
                         }
                     } catch (const TreeException& e) {
                         cerr << "Error: " << e.what() << endl;
