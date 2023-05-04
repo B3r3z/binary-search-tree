@@ -1,250 +1,192 @@
 #ifndef TREE_H
 #define TREE_H
-#include<iostream>
-#include"Element.h"
-//#include"level.h"
 
-template<class T>
-class Tree{
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include "Element.h"
+
+class TreeException : public std::runtime_error {
 public:
-    //Element<T> *_first;
-    Tree(): _first(nullptr) {}
-    Tree(const Tree<T> &source);
-    ~Tree(){};
-    void add(T value);
-    bool isEmpty() const;
-    bool isIn(T value, Element<T>*current) const;
-    //void TODelete(Element<T>* toDelete = nullptr, T valueToDelete=0);
-    Element<T>* remove(Element<T>*current, T value);
-    //Element<T>* isIn(T value, Element<T>*current);
-    void toDisp(int howToDoIt);
-    void dispPreorder(Element<T>*current);
-    void dispInorder(Element<T>*current);
-    void dispPostorder(Element<T>*current);
-    void setDepth(Element<T>*current);
-    unsigned int minPath();
-    unsigned int maxPath();   
-    void shift(Element<T>*first, Element<T>* second);
-    Element<T>* succesor(Element<T>* current);
-    Element<T>* treeMinValue(Element<T>*current);
-    Element<T>* getFirst(){return _first;};
-    void SetFirst(Element<T>*current){ _first = current;};
-protected:
-    Element<T> *_first;
+    explicit TreeException(const std::string& msg) : std::runtime_error(msg) {}
 };
+
+
+template <class T>
+class Tree {
+public:
+    Tree() : _root(nullptr) {}
+
+    void addElement(T value);
+    bool isEmpty() const;
+    bool contains(T value) const;
+    void removeElement(T value);
+    void display(int mode) const;
+    unsigned int maxDepth() const;
+
+private:
+    std::shared_ptr<Element<T>> _root;
+
+    void addElementHelper(const std::shared_ptr<Element<T>>& current, T value);
+    bool containsHelper(const std::shared_ptr<Element<T>>& current, T value) const;
+    std::shared_ptr<Element<T>> removeElementHelper(const std::shared_ptr<Element<T>>& current, T value);
+    void displayPreorder(const std::shared_ptr<Element<T>>& current) const;
+    void displayInorder(const std::shared_ptr<Element<T>>& current) const;
+    void displayPostorder(const std::shared_ptr<Element<T>>& current) const;
+    unsigned int maxDepthHelper(const std::shared_ptr<Element<T>>& current) const;
+    std::shared_ptr<Element<T>> treeMinValue(const std::shared_ptr<Element<T>>& current) const;
+    
+};
+
+template <class T>
+void Tree<T>::addElement(T value) {
+    if (isEmpty()) {
+        _root = std::make_shared<Element<T>>(value);
+    } else {
+        addElementHelper(_root, value);
+    }
+}
+
+template <class T>
+void Tree<T>::addElementHelper(const std::shared_ptr<Element<T>>& current, T value) {
+    if (value < current->getValue()) {
+        if (current->_left == nullptr) {
+            current->_left = std::make_shared<Element<T>>(value);
+        } else {
+            addElementHelper(current->_left, value);
+        }
+    } else {
+        if (current->_right == nullptr) {
+            current->_right = std::make_shared<Element<T>>(value);
+        } else {
+            addElementHelper(current->_right, value);
+        }
+    }
+}
 
 template<class T>
 bool Tree<T>::isEmpty() const{
-    return _first == nullptr;
+    return _root == nullptr;
 }
-template<class T>
-void Tree<T>::add(T value){
-    if(isEmpty()){
-        _first = new Element<T>(value);
-    }else{
-    Element<T>* current =_first;
-        while (current !=nullptr){
-            if(value >= (current ->getValue())){
-               if(current ->_left == nullptr){
-                //   current ->_left = new Element<T>(value);
-                //   current ->_left->_parent = current;
-                    current -> setLeft(value);
-                    current -> _left->setParent(current);
-                    break;
-               }
-               else current = (current->_left);
-            }else if(value < current->getValue()){
-               if(current->_right==nullptr){
-                //   current->_right = new Element<T>(value);
-                //   current->_right->_parent = current;
-                    current -> setRight(value);
-                    current -> _right->setParent(current);
-                    //std::cout<<"jestem pusty xd\n";
-                   break;
-               }
-               else current = (current ->_right);
-           }
-       }
+
+template <class T>
+bool Tree<T>::contains(T value) const {
+    return containsHelper(_root, value);
+}
+
+template <class T>
+bool Tree<T>::containsHelper(const std::shared_ptr<Element<T>>& current, T value) const {
+    if (current == nullptr) {
+        return false;
+    }
+    if (current->getValue() == value) {
+        return true;
+    } else if (value < current->getValue()) {
+        return containsHelper(current->_left, value);
+    } else {
+        return containsHelper(current->_right, value);
     }
 }
-/*
-template<class T>
-Element<T>* Tree<T>::isIn(T value, Element<T>*current){
-    bool check = true;
-    while (current and (current->getValue() != value)){
-        if(current->getValue() == value) check = false;
-        if(value < current->getValue()) current=current->_right;
-        else current=current->_left;
-    }
-    if(check==false) return current;
-    else return nullptr;
+
+template <class T>
+void Tree<T>::removeElement(T value) {
+    _root = removeElementHelper(_root, value);
 }
-*/
-template<class T>
-bool Tree<T>::isIn(T value, Element<T>*current) const{
-    while (current and (current->getValue() != value)){
-        if(current->getValue() == value) return true;
-        if(value < current->getValue()) current=current->_right;
-        else current=current->_left;
-    }
-    return false;
-}
-template<class T>
-Element<T>* Tree<T>::remove(Element<T>*current, T value){
-    if(current == nullptr)
+
+template <class T>
+std::shared_ptr<Element<T>> Tree<T>::removeElementHelper(const std::shared_ptr<Element<T>>& current, T value) {
+    if (current == nullptr) {
         return nullptr;
-    if(current->_value < value)
-        current->_left = remove(current->_left,value);
-    else if(current->_value > value)
-        current->_right = remove(current->_right,value);
-    else{
-        if(current->_left == nullptr && current->_right == nullptr){
-            delete(current);
+    }
+
+    if (value < current->getValue()) {
+        current->_left = removeElementHelper(current->_left, value);
+    } else if (value > current->getValue()) {
+        current->_right = removeElementHelper(current->_right, value);
+    } else {
+        if (current->_left == nullptr && current->_right == nullptr) {
             return nullptr;
-        }
-        else if(current->_left == nullptr){
-            Element<T> *temp = current->_right;
-            delete(current);
-            return temp;
-        }
-        else if(current->_right == nullptr){
-            Element<T> *temp = current->_left;
-            delete(current);
-            return temp;
-        }
-        else{
-            Element<T>* rightMin = treeMinValue(current->_left);
-            current->_value = rightMin->_value;
-            current->_left = remove(current->_left,rightMin->_value);
+        } else if (current->_left == nullptr) {
+            return current->_right;
+        } else if (current->_right == nullptr) {
+            return current->_left;
+        } else {
+            std::shared_ptr<Element<T>> minValueNode = treeMinValue(current->_right);
+            current->setValue(minValueNode->getValue());
+            current->_right = removeElementHelper(current->_right, minValueNode->getValue());
         }
     }
     return current;
 }
 
-template<class T>
-Element<T>* Tree<T>::treeMinValue(Element<T>*current){
-    while (current->_right != nullptr){
-        current=current->_right;
-    }
-    return current;    
-}
-
-template<class T>
-void Tree<T>::toDisp(int a){
-    switch (a)
-    {
-    case 0:
-        dispPreorder(_first);
-        break;
-    case 1:
-        dispInorder(_first);
-        break;
-    case 2:
-        dispPostorder(_first);
-        break;
-    default:
-        break;
+template <class T>
+void Tree<T>::display(int mode) const {
+    switch (mode) {
+        case 0:
+            displayPreorder(_root);
+            break;
+        case 1:
+            displayInorder(_root);
+            break;
+        case 2:
+            displayPostorder(_root);
+            break;
+        default:
+            std::cout << "Invalid mode" << std::endl;
+            break;
     }
 }
 
-template<class T>
-void Tree<T>::dispPreorder(Element<T>*current){
-    if(current){
+template <class T>
+void Tree<T>::displayPreorder(const std::shared_ptr<Element<T>>& current) const {
+    if (current) {
         std::cout << current->getValue() << " ";
-        dispPreorder(current -> _left);
-        dispPreorder(current -> _right);
+        displayPreorder(current->_left);
+        displayPreorder(current->_right);
     }
 }
 
-template<class T>
-void Tree<T>::dispInorder(Element<T>*current){
-    if(current){
-        dispInorder(current -> _left);
+template <class T>
+void Tree<T>::displayInorder(const std::shared_ptr<Element<T>>& current) const {
+    if (current) {
+        displayInorder(current->_left);
         std::cout << current->getValue() << " ";
-        dispInorder(current -> _right);
+        displayInorder(current->_right);
     }
 }
 
-template<class T>
-void Tree<T>::dispPostorder(Element<T>*current){
-    if(current){
-        dispPostorder(current -> _left);
-        dispPostorder(current -> _right);
+template <class T>
+void Tree<T>::displayPostorder(const std::shared_ptr<Element<T>>& current) const {
+    if (current) {
+        displayPostorder(current->_left);
+        displayPostorder(current->_right);
         std::cout << current->getValue() << " ";
     }
 }
 
-template<class T>
-void Tree<T>::setDepth(Element<T> *current){
-  // Element<T>*current = _first;
-    if(current){
-        if(current-> _left != nullptr){
-            current->_left->_deepth = current->_deepth +1;
-        }
-        if(current->_right!= nullptr){
-            current->_right->_deepth=current->_right->_deepth+1;
-        }
-
-        setDepth(current->_left);
-        setDepth(current->_right);    
-    }
-    
-    
+template <class T>
+unsigned int Tree<T>::maxDepth() const {
+    return maxDepthHelper(_root);
 }
 
-template<class T>
-unsigned int Tree<T>::minPath(){
-    unsigned int minDepth = 4294967295;
-
-    Element<T>*current = _first;
-/*    if(current){
-        if(current-> _left){
-            current->_left->_deepth = current->_deepth +1;
-        }
-        if(current->_right){
-            current->_right->_deepth=current->_right->_deepth+1;
-        }
+template <class T>
+unsigned int Tree<T>::maxDepthHelper(const std::shared_ptr<Element<T>>& current) const {
+    if (current == nullptr) {
+        return 0;
     }
-*/
-    setDepth(current);
-    while (current)
-    {
-        /* code */
-        if(!(current->_left == nullptr and current->_right==nullptr)){
-            if(current->_deepth<minDepth){
-                minDepth= current->_deepth;
-            }
-        }
-        if(current->_left) current=current->_left;
-        if(current->_right) current=current->_right;
 
-    }
-    return minDepth;
-    
+    unsigned int leftDepth = maxDepthHelper(current->_left);
+    unsigned int rightDepth = maxDepthHelper(current->_right);
+
+    return std::max(leftDepth, rightDepth) + 1;
 }
 
-template<class T>
-unsigned int Tree<T>::maxPath(){
-    Element<T>*current = _first;
-    unsigned int maxDepth = 0;
-    setDepth(current);
-    while (current != nullptr)
-    {
-        /* code */
-        if(!(current->_left == nullptr and current->_right==nullptr)){
-            if(current->_deepth > maxDepth){
-                maxDepth= current->_deepth;
-            }
-        }
-        if(current->_left) current=current->_left;
-        if(current->_right) current=current->_right;
-
+template <class T>
+std::shared_ptr<Element<T>> Tree<T>::treeMinValue(const std::shared_ptr<Element<T>>& current) const {
+    std::shared_ptr<Element<T>> minValueNode = current;
+    while (minValueNode && minValueNode->_left != nullptr) {
+        minValueNode = minValueNode->_left;
     }
-    return maxDepth;
-    
-
+    return minValueNode;
 }
-
-
-
 #endif

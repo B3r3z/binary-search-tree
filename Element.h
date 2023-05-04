@@ -1,54 +1,58 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
 #include<iostream>
-//#include"level.h"
+#include <memory>
+
 template<class T>
 class Tree;
 
 template<class T>
 class Element{
     public:
-    Element(T valueIn, Element<T> *leftChild = nullptr, Element<T> *rightChild = nullptr, Element<T>* parent = nullptr)
+    Element(T valueIn, std::shared_ptr<Element<T>> leftChild = nullptr, std::shared_ptr<Element<T>> rightChild = nullptr, std::shared_ptr<Element<T>> parent = nullptr)
     : _value(valueIn), _right(rightChild) , _left(leftChild), _parent(parent){};
     T getValue() const{return _value;};
     void setLeft(T value);
     void setRight(T value);
-    void setParent(Element * point);
+    void setParent(std::shared_ptr<Element<T>> point);
     ~Element(){};
-    Element<T> getLeft();
-    Element<T> getRight();
-    Element<T> getParent();
+    std::shared_ptr<Element<T>> getLeft();
+    std::shared_ptr<Element<T>> getRight();
+    std::shared_ptr<Element<T>> getParent();
     T minValue();
-    void setValue(T vaule);
+    void setValue(T value);
     private:
     T _value;
-    Element<T> *_parent;
-    Element<T> *_left;
-    Element<T> *_right;
+    std::shared_ptr<Element<T>> _parent;
+    std::shared_ptr<Element<T>> _left;
+    std::shared_ptr<Element<T>> _right;
     unsigned int _deepth;
     friend class Tree<T>;
-
-    
 };
 
 template<class T>
 void Element<T>::setLeft(T vaule){
-    _left = new Element<T>(vaule);
+    _left = std::make_shared<Element<T>>(vaule);
 }
 template<class T>
 void Element<T>::setRight(T vaule){
-    _right = new Element<T>(vaule);
+    _right = std::make_shared<Element<T>>(vaule);
 }
 
 template<class T>
-void Element<T>::setParent(Element<T>* point){
+void Element<T>::setParent(std::shared_ptr<Element<T>> point){
     _parent=point;
 }
 
 template<class T>
 T Element<T>::minValue(){
-    if(_left ==nullptr) return _value;
+    if(_left == nullptr) return _value;
     else return _left->minValue();
+}
+
+template<class T>
+void Element<T>:: setValue(T value){
+    _value = value;
 }
 
 #endif

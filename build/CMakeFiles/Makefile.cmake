@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
+<<<<<<< HEAD
   "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeCCompiler.cmake.in"
   "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeCCompilerABI.c"
   "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeCInformation.cmake"
@@ -94,6 +95,20 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake"
   "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/Internal/FeatureTesting.cmake"
   "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/Platform/Linux-Determine-CXX.cmake"
+=======
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeCInformation.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeCXXInformation.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeGenericSystem.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/Compiler/GNU-C.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake"
+  "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/Compiler/GNU.cmake"
+>>>>>>> Master
   "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/Platform/Linux-GNU-C.cmake"
   "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/Platform/Linux-GNU-CXX.cmake"
   "/home/b4rt/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/Platform/Linux-GNU.cmake"
