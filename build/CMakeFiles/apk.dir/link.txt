@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/apk.dir/main.cpp.o  -o apk 
+/usr/bin/g++ -g CMakeFiles/apk.dir/main.cpp.o -o apk 

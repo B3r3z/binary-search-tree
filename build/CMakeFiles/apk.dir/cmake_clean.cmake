@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/apk.dir/main.cpp.o"
+  "CMakeFiles/apk.dir/main.cpp.o.d"
   "apk"
   "apk.pdb"
 )

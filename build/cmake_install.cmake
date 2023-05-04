@@ -1,4 +1,4 @@
-# Install script for directory: /home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne
+# Install script for directory: /home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -37,6 +37,11 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
+endif()
+
 if(CMAKE_INSTALL_COMPONENT)
   set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
 else()
@@ -45,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/b4rt/Dokumenty/Projekty c++/SEM 3/Tydzien 11 drzewo binarne/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
