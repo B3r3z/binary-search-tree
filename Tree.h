@@ -35,6 +35,7 @@ private:
     void displayPostorder(const std::shared_ptr<Element<T>>& current) const;
     unsigned int maxDepthHelper(const std::shared_ptr<Element<T>>& current) const;
     std::shared_ptr<Element<T>> treeMinValue(const std::shared_ptr<Element<T>>& current) const;
+    
 };
 
 template <class T>
@@ -65,7 +66,7 @@ void Tree<T>::addElementHelper(const std::shared_ptr<Element<T>>& current, T val
 
 template<class T>
 bool Tree<T>::isEmpty() const{
-    return _first == nullptr;
+    return _root == nullptr;
 }
 
 template <class T>
@@ -90,6 +91,32 @@ bool Tree<T>::containsHelper(const std::shared_ptr<Element<T>>& current, T value
 template <class T>
 void Tree<T>::removeElement(T value) {
     _root = removeElementHelper(_root, value);
+}
+
+template <class T>
+std::shared_ptr<Element<T>> Tree<T>::removeElementHelper(const std::shared_ptr<Element<T>>& current, T value) {
+    if (current == nullptr) {
+        return nullptr;
+    }
+
+    if (value < current->getValue()) {
+        current->_left = removeElementHelper(current->_left, value);
+    } else if (value > current->getValue()) {
+        current->_right = removeElementHelper(current->_right, value);
+    } else {
+        if (current->_left == nullptr && current->_right == nullptr) {
+            return nullptr;
+        } else if (current->_left == nullptr) {
+            return current->_right;
+        } else if (current->_right == nullptr) {
+            return current->_left;
+        } else {
+            std::shared_ptr<Element<T>> minValueNode = treeMinValue(current->_right);
+            current->setValue(minValueNode->getValue());
+            current->_right = removeElementHelper(current->_right, minValueNode->getValue());
+        }
+    }
+    return current;
 }
 
 template <class T>
@@ -154,5 +181,12 @@ unsigned int Tree<T>::maxDepthHelper(const std::shared_ptr<Element<T>>& current)
     return std::max(leftDepth, rightDepth) + 1;
 }
 
-
+template <class T>
+std::shared_ptr<Element<T>> Tree<T>::treeMinValue(const std::shared_ptr<Element<T>>& current) const {
+    std::shared_ptr<Element<T>> minValueNode = current;
+    while (minValueNode && minValueNode->_left != nullptr) {
+        minValueNode = minValueNode->_left;
+    }
+    return minValueNode;
+}
 #endif
