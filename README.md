@@ -15,7 +15,7 @@ Clone the repository using the following command:
 
 bash
 
-git clone https://github.com/your_username/your_repository.git
+git clone https://github.com/B3r3z/binary-search-tree
 
 Compile and run the program using run.sh and cmake. 
 
@@ -27,4 +27,5 @@ Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License.
+Copyright (c) Bartosz Berezowski
