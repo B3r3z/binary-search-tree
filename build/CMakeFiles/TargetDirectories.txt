@@ -1,3 +1,0 @@
-/home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree/build/CMakeFiles/apk.dir
-/home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree/build/CMakeFiles/edit_cache.dir
-/home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree/build/CMakeFiles/rebuild_cache.dir

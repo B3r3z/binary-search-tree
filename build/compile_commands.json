@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree/build",
-  "command": "/usr/bin/g++   -g -std=gnu++11 -Wall -g -Wextra -Wpedantic -o CMakeFiles/apk.dir/main.cpp.o -c /home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree/main.cpp",
-  "file": "/home/b4rt/learn/ProjectInC/BTS_tree_binare_c/binary-search-tree/main.cpp",
-  "output": "CMakeFiles/apk.dir/main.cpp.o"
-}
-]
