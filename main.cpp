@@ -47,11 +47,7 @@ int main() {
                     cout << "Enter element " << (i + 1) << " to remove: ";
                     cin >> toDelete;
                     try {
-                        if (tree.contains(toDelete)) {
-                            tree.removeElement(toDelete);
-                        } else {
-                            cout << "Element not found in the tree." << endl;
-                        }
+                        tree.removeElement(toDelete); // Directly call removeElement
                     } catch (const TreeException& e) {
                         cerr << "Error: " << e.what() << endl;
                     }

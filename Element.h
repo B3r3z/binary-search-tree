@@ -12,8 +12,6 @@ class Element{
     Element(T valueIn, std::shared_ptr<Element<T>> leftChild = nullptr, std::shared_ptr<Element<T>> rightChild = nullptr, std::shared_ptr<Element<T>> parent = nullptr)
     : _value(valueIn), _right(rightChild) , _left(leftChild), _parent(parent){};
     T getValue() const{return _value;};
-    void setLeft(T value);
-    void setRight(T value);
     void setParent(std::shared_ptr<Element<T>> point);
     ~Element(){};
     std::shared_ptr<Element<T>> getLeft();
@@ -26,18 +24,8 @@ class Element{
     std::shared_ptr<Element<T>> _parent;
     std::shared_ptr<Element<T>> _left;
     std::shared_ptr<Element<T>> _right;
-    unsigned int _deepth;
     friend class Tree<T>;
 };
-
-template<class T>
-void Element<T>::setLeft(T vaule){
-    _left = std::make_shared<Element<T>>(vaule);
-}
-template<class T>
-void Element<T>::setRight(T vaule){
-    _right = std::make_shared<Element<T>>(vaule);
-}
 
 template<class T>
 void Element<T>::setParent(std::shared_ptr<Element<T>> point){
